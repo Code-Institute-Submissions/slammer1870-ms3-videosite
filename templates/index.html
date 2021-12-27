@@ -28,7 +28,7 @@
       <img
         src="{{url_for('static',filename='img/phones.png')}}"
         class="h-auto w-full max-w-screen-md aspect-video"
-      ></img>
+      />
     </div>
     <div
       class="
@@ -49,14 +49,17 @@
     <!--Post Grid-->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {% for post in posts %}
-      <a href="{{url_for('lesson', difficulty=post.difficulty, category=post.category, lesson=post._id)}}" class="bg-gray-50">
-        <img src="{{post.thumbnail}}" class="bg-gray-200 aspect-video"></img>
+      <a
+        href="{{url_for('lesson', difficulty=post.difficulty, category=post.category, lesson=post._id)}}"
+        class="bg-gray-50"
+      >
+        <img src="{{post.thumbnail}}" class="bg-gray-200 aspect-video" />
         <div class="p-2 lg:p-4">
           <span class="uppercase text-gray-400 font-light text-sm"
             >{{post.category}}</span
           ><span class="ml-1 uppercase text-gray-400 font-light text-sm"
-          >{{post.section}}</span
-        >
+            >{{post.section}}</span
+          >
           <h5 class="font-medium text-lg mb-1">{{post.title}}</h5>
           <p class="text-sm mb-1">{{post.description}}.</p>
         </div>

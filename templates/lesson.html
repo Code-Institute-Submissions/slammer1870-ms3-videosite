@@ -35,7 +35,10 @@
   <body>
     <div class="h-screen flex flex-col">
       <div class="h-auto">
-        <a href="{{url_for('category', difficulty=lesson.difficulty, section=lesson.section)}}" class="flex justify-start items-center bg-gray-200 p-4">
+        <a
+          href="{{url_for('category', difficulty=lesson.difficulty, section=lesson.section)}}"
+          class="flex justify-start items-center bg-gray-200 p-4"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 12.607 26.52"
@@ -71,22 +74,46 @@
         ></iframe>
         <div class="p-4 bg-white shadow-md">
           <div class="max-w-screen-sm mx-auto">
-            <h5 class="text-2xl mb-4"><span class="capitalize">{{lesson.category}}</span> <span class="capitalize"> {{lesson.section}} </span> - <span class="capitalize"> {{lesson.difficulty}} </span></h5>
+            <h5 class="text-2xl mb-4">
+              <span class="capitalize">{{lesson.category}}</span>
+              <span class="capitalize"> {{lesson.section}} </span> -
+              <span class="capitalize"> {{lesson.difficulty}} </span>
+            </h5>
             <p>{{lesson.description}}</p>
-        </div>
-      </div>
-      <div class="h-auto overflow-scroll max-w-screen-sm mx-auto lg:pt-4">
-        {% for post in posts%}
-        <a href="{{url_for('lesson', difficulty=post.difficulty, category=post.category, lesson=post._id)}}" class="px-4 py-6 flex items-center {% if post._id == lesson._id %} bg-gray-100 {% endif %}">
-          <img src="{{post.thumbnail}}" class="h-16 bg-gray-400 aspect-video"></img>
-          <div class="px-4">
-            <h6 class="text-lg">{{post.title}}</h6>
-            <p class="text-sm">
-              {{post.description}}
-            </p>
           </div>
-        </a>
-        {% endfor %}
+        </div>
+        <div class="h-auto overflow-scroll max-w-screen-sm mx-auto lg:pt-4">
+          {% for post in posts%}
+          <a
+            href="{{url_for('lesson', difficulty=post.difficulty, category=post.category, lesson=post._id)}}"
+            class="
+              px-4
+              py-6
+              flex
+              items-center
+              {%
+              if
+              post._id
+              ==
+              lesson._id
+              %}
+              bg-gray-100
+              {%
+              endif
+              %}
+            "
+          >
+            <img
+              src="{{post.thumbnail}}"
+              class="h-16 bg-gray-400 aspect-video"
+            />
+            <div class="px-4">
+              <h6 class="text-lg">{{post.title}}</h6>
+              <p class="text-sm">{{post.description}}</p>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </body>

@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 <div class="pt-20 p-4 container mx-auto">
-  <a href="{{url_for('admin', type='videos')}}" >
+  <a href="{{url_for('admin', type='videos')}}">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="53.907"
@@ -36,7 +36,7 @@
         stroke-width="2"
       />
     </svg>
-</a>
+  </a>
   {% from "partials/_formhelpers.html" import render_field %}
   <form action="" method="POST" class="max-w-screen-sm mx-auto">
     <div class="flex flex-col text-sm font-semibold">
