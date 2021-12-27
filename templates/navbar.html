@@ -1,0 +1,154 @@
+<!--Navbar-->
+<div>
+  <nav
+    class="
+      p-4
+      fixed
+      w-full
+      z-50
+      flex
+      justify-between
+      items-center
+      text-2xl
+      bg-gray-600
+    "
+  ><!--sideBar represents variable to show/hide mobile sliding menu-->
+    <div
+      class="container mx-auto flex justify-between items-center"
+      x-data="{ sideBar: false }"
+    >
+      <a href="/" class="text-2xl font-medium text-white">
+      VIDEOSITE
+      <a/>
+      <!--SVGs used as buttons to show/hide mobile menu-->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="20"
+        viewBox="0 0 25 20"
+        class="md:hidden z-50 relative"
+        :class="{ 'hidden' : sideBar }"
+        x-on:click="sideBar = ! sideBar"
+      >
+        <line
+          id="Line_1"
+          data-name="Line 1"
+          y1="25"
+          transform="translate(25 1.5) rotate(90)"
+          fill="none"
+          stroke="#fff"
+          stroke-width="3"
+        />
+        <line
+          id="Line_2"
+          data-name="Line 2"
+          y1="25"
+          transform="translate(25 10) rotate(90)"
+          fill="none"
+          stroke="#fff"
+          stroke-width="3"
+        />
+        <line
+          id="Line_3"
+          data-name="Line 3"
+          y1="25"
+          transform="translate(25 18.5) rotate(90)"
+          fill="none"
+          stroke="#fff"
+          stroke-width="3"
+        />
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        class="md:hidden z-50 relative"
+        :class="{ 'hidden' : !sideBar }"
+        x-on:click="sideBar = ! sideBar"
+      >
+        <line
+          id="Line_7"
+          data-name="Line 7"
+          x1="24"
+          transform="translate(17.324 0.354) rotate(135)"
+          fill="none"
+          stroke="#fff"
+          stroke-width="3"
+        />
+        <line
+          id="Line_8"
+          data-name="Line 8"
+          x1="24"
+          transform="translate(0.354 0.354) rotate(45)"
+          fill="none"
+          stroke="#fff"
+          stroke-width="3"
+        />
+      </svg>
+      <div
+        class="
+          transform
+          flex
+          item-center
+          top-0
+          right-0
+          mt-0
+          pr-4
+          md:pr-0
+          w-5/12
+          md:w-auto
+          lg:w-auto
+          fixed
+          h-screen
+          bg-gray-600
+          overflow-auto
+          ease-in-out
+          transition-all
+          duration-300
+          md:block
+          md:relative
+          md:-translate-x-0
+          md:h-auto
+          md:my-0
+          md:bg-transparent
+        "
+        :class="sideBar ? '-translate-x-0' : 'translate-x-full'"
+      >
+        <menu
+          class="
+            md:my-auto
+            md:flex-row
+            md:items-center
+            md:justify-between
+            flex flex-col
+            justify-start
+            mt-20
+            text-sm
+            text-white
+            text-left
+            pl-8
+            md:pl-0
+          "
+        >
+          <a href="{{url_for('category', difficulty='beginner', section='guard')}}"><button class="md:mb-0 md:mr-8 lg:mr-16 mb-4 uppercase text-left" x-on:click="sideBar = ! sideBar">Guard</button></a>
+          <a href="{{url_for('category', difficulty='beginner', section='passing')}}"><button class="md:mb-0 md:mr-8 lg:mr-16 mb-4 uppercase text-left" x-on:click="sideBar = ! sideBar">Passing</button></a>
+          <a href="{{url_for('category', difficulty='beginner', section='submissions')}}" ><button class="md:mb-0 md:mr-8 lg:mr-16 mb-4 uppercase text-left" x-on:click="sideBar = ! sideBar">Submissions</button></a>
+          <a href="{{url_for('category', difficulty='beginner', section='defense')}}" ><button class="md:mb-0 md:mr-8 lg:mr-16 mb-4 uppercase text-left" x-on:click="sideBar = ! sideBar">Defense</button></a>
+          <!--Buttons rendered conditionally is user is logged in or not-->
+          {% if session.logged_in %}
+            {% if session.user.admin %}
+            <a href="{{ url_for("admin", type="videos") }}"><button class="md:mb-0 md:mr-8 lg:mr-16 mb-4 uppercase text-left" x-on:click="sideBar = ! sideBar">Admin</button></a>
+            {% endif %}
+          <a href="/logout"><button  class="uppercase bg-gray-200 px-6 py-2 text-center text-black font-medium"  x-on:click="sideBar = ! sideBar">
+            Log Out</button>
+        </a>
+          {% else %}
+          <a href="/login"  ><button class="uppercase bg-gray-200 px-6 py-2 text-center text-black font-medium" x-on:click="sideBar = ! sideBar">
+            Log In</button>
+        </a>{% endif %}
+        </menu>
+      </div>
+    </div>
+  </nav>
+</div>
