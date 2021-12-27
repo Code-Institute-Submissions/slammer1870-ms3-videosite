@@ -1,0 +1,68 @@
+{% extends "base.html" %} {% block content %}
+<div class="min-h-screen">
+  <div class="h-96 lg:h-128 w-screen relative bg-gray-600">
+    <div
+      class="
+        container
+        absolute
+        inset-0
+        py-16
+        lg:py-72
+        px-4
+        xl:px-0
+        z-10
+        mx-auto
+        flex flex-col
+        lg:flex-row
+        items-center
+        lg:items-start
+        justify-start
+        lg:justify-around
+      "
+    >
+      <div class="text-white w-full max-w-screen-sm pt-16">
+        <h1 class="text-4xl md:text-4xl font-medium mb-12">
+          Welcome to the Video Library
+        </h1>
+      </div>
+      <img
+        src="{{url_for('static',filename='img/phones.png')}}"
+        class="h-auto w-full max-w-screen-md aspect-video"
+      ></img>
+    </div>
+    <div
+      class="
+        h-96
+        lg:h-128
+        w-screen
+        bg-white
+        absolute
+        bg-fixed bg-fit bg-cover bg-center
+      "
+      style="clip-path: polygon(0 100%, 100% 85%, 100% 100%, 0% 100%)"
+    ></div>
+  </div>
+  <div class="container mx-auto pt-36 md:pt-56 lg:pt-72 p-4 md:p-16 mb-12">
+    <h1 class="text-3xl md:text-4xl font-medium mb-8 text-gray-900 w-full">
+      Latest Posts
+    </h1>
+    <!--Post Grid-->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {% for post in posts %}
+      <a href="{{url_for('lesson', difficulty=post.difficulty, category=post.category, lesson=post._id)}}" class="bg-gray-50">
+        <img src="{{post.thumbnail}}" class="bg-gray-200 aspect-video"></img>
+        <div class="p-2 lg:p-4">
+          <span class="uppercase text-gray-400 font-light text-sm"
+            >{{post.category}}</span
+          ><span class="ml-1 uppercase text-gray-400 font-light text-sm"
+          >{{post.section}}</span
+        >
+          <h5 class="font-medium text-lg mb-1">{{post.title}}</h5>
+          <p class="text-sm mb-1">{{post.description}}.</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% include "footer.html" %} {% endblock %}
