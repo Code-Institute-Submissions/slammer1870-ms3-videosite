@@ -3,7 +3,7 @@ from flask import session, request, redirect, url_for
 from flask.helpers import flash
 
 
-#Login Required Decorator
+# Login Required Decorator
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -13,7 +13,9 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-#Admin Required Decorator
+# Admin Required Decorator
+
+
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
