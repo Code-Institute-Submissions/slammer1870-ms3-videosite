@@ -1,4 +1,4 @@
-from flask import Flask, session, g, redirect, url_for, flash, render_template, request, abort
+from flask import session, g, redirect, url_for, flash
 import uuid
 from datetime import datetime
 
@@ -45,7 +45,8 @@ class User:
         # Creates the new user and starts session
         if app.db.users.insert_one(user):
             self.start_session(user)
-            flash("Thank you for registering, you are now logged in!", "bg-green-400")
+            flash("Thank you for registering, you are now logged in!",
+                  "bg-green-400")
             return True
 
     # Login method
@@ -76,7 +77,7 @@ class User:
         return True
 
 
-# Make  request to the Vimoe API to retireve a thumbnail by parsing the video id
+# Make request to the Vimoe API to retireve a thumbnail
 
 def set_thumbnail(url):
 
@@ -95,13 +96,6 @@ def set_thumbnail(url):
 
 
 class Post:
-
-    def __init__(self, title=None, description=None, url=None, category=None, difficulty=None):
-        self.title = title
-        self.description = description
-        self.url = url
-        self.category = category
-        self.difficulty = difficulty
 
     def create(self, form):
         post = {

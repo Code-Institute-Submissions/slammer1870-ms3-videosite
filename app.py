@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request
+from flask import redirect, url_for, session, flash
 import os
 import pymongo
 
@@ -57,7 +58,11 @@ def logout():
 @app.route("/videos/<difficulty>/<section>/")
 def category(section, difficulty):
     posts = db.posts.find({"section": section, "difficulty": difficulty})
-    return render_template("category.html", posts=posts, difficulty=difficulty, section=section)
+    return render_template("category.html",
+                           posts=posts,
+                           difficulty=difficulty,
+                           section=section
+                           )
 
 # Render lesson page with all videos in that lesson
 

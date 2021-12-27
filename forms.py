@@ -34,8 +34,15 @@ class PostForm(Form):
         min=1, max=50), validators.DataRequired()])
     url = URLField('URL', [validators.DataRequired()])
     difficulty = SelectField(u'Difficulty', choices=[(
-        'beginner', 'Beginner'), ('intermediate', 'Intermediate'), ('advanced', 'Advanced')], validators=[validators.DataRequired()])
+        'beginner', 'Beginner'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced')],
+        validators=[validators.DataRequired()])
     category = StringField('Category', [validators.Length(
         min=1, max=50), validators.DataRequired()])
     section = SelectField(u'Section', choices=[(
-        'guard', 'Guard'), ('passing', 'Passing'), ('submissions', 'Submissions'), ('defense', 'Defense')], validators=[validators.DataRequired()])
+        'guard', 'Guard'),
+        ('passing', 'Passing'),
+        ('submissions', 'Submissions'),
+        ('defense', 'Defense')],
+        validators=[validators.DataRequired()])
