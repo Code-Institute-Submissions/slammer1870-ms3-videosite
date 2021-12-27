@@ -18,18 +18,11 @@
       src="https://unpkg.com/alpinejs@3.3.4/dist/cdn.min.js"
     ></script>
     <!--Tailwind CSS Link-->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            spacing: {
-              '128': '32rem',
-            }
-          }
-        }
-      }
-    </script>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/main.css')}}"
+    />
+    
     <title>Video Site</title>
   </head>
   {% include "navbar.html" %}

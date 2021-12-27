@@ -10,8 +10,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Montserrat", "Helvetica", "Arial", "sans-serif"],
+        sans: ["Helvetica", "Arial", "sans-serif"],
       },
+      spacing: {
+        '128': '32rem',
+      }
     },
   },
   variants: {
@@ -19,3 +22,4 @@ module.exports = {
   },
   plugins: [],
 };
+
