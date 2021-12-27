@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="ExecBJJ landing page and membership site"
-    />
+    <meta name="description" content="Video Site" />
     <link
       rel="shortcut icon"
       href="{{ url_for('static', filename='favicon.png') }}"
@@ -25,8 +22,8 @@
 
     <title>Video Site</title>
   </head>
-  {% include "navbar.html" %}
   <body>
+    {% include "navbar.html" %}
     <!--Messages are included here-->
     {% include './_messages.html' %} {% block content %} {% endblock content %}
   </body>

@@ -27,6 +27,7 @@
       </div>
       <img
         src="{{url_for('static',filename='img/phones.png')}}"
+        alt="Phones graphic"
         class="h-auto w-full max-w-screen-md aspect-video"
       />
     </div>
@@ -53,7 +54,11 @@
         href="{{url_for('lesson', difficulty=post.difficulty, category=post.category, lesson=post._id)}}"
         class="bg-gray-50"
       >
-        <img src="{{post.thumbnail}}" class="bg-gray-200 aspect-video" />
+        <img
+          src="{{post.thumbnail}}"
+          alt="{{post.tite}}"
+          class="bg-gray-200 aspect-video"
+        />
         <div class="p-2 lg:p-4">
           <span class="uppercase text-gray-400 font-light text-sm"
             >{{post.category}}</span
