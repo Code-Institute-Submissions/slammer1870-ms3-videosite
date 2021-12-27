@@ -4,7 +4,7 @@ from datetime import datetime
 
 from werkzeug.urls import url_parse
 from passlib.hash import pbkdf2_sha256
-from app import db
+import app
 import os
 import requests
 from urllib.parse import urlparse
@@ -38,12 +38,12 @@ class User:
         user['password'] = pbkdf2_sha256.encrypt(form.password.data)
 
         # Check for existing email address
-        if db.users.find_one({"email": user['email']}):
+        if app.db.users.find_one({"email": user['email']}):
             flash("User already exists", "bg-red-400")
             return False
 
         # Creates the new user and starts session
-        if db.users.insert_one(user):
+        if app.db.users.insert_one(user):
             self.start_session(user)
             flash("Thank you for registering, you are now logged in!", "bg-green-400")
             return True
@@ -51,7 +51,7 @@ class User:
     # Login method
     def login(self, form):
 
-        user = db.users.find_one({
+        user = app.db.users.find_one({
             "email": form.email.data
         })
 
@@ -72,7 +72,7 @@ class User:
     # Method to set a user as admin
     def set_admin(self, user):
         user['admin'] = True
-        db.users.update_one({"_id": user['_id']}, {"$set": user})
+        app.db.users.update_one({"_id": user['_id']}, {"$set": user})
         return True
 
 
@@ -116,12 +116,12 @@ class Post:
             "section": form.section.data
         }
 
-        db.posts.insert_one(post)
+        app.db.posts.insert_one(post)
         return True
 
     # Post edit method
     def edit(self, id, form):
-        db.posts.find_one_and_update(
+        app.db.posts.find_one_and_update(
             {"_id": id}, {"$set": {"updated_at": datetime.now(),
                                    "title": form.title.data,
                                    "description": form.description.data,
@@ -134,7 +134,7 @@ class Post:
 
     # Post delete method
     def delete(self, id):
-        db.posts.delete_one({"_id": id})
+        app.db.posts.delete_one({"_id": id})
         return True
 
     def __str__(self):
