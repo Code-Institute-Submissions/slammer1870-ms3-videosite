@@ -32,7 +32,7 @@ class PostForm(Form):
         min=1, max=50), validators.DataRequired()])
     description = StringField('Description', [validators.Length(
         min=1, max=50), validators.DataRequired()])
-    url = URLField('URL', [validators.DataRequired()])
+    url = URLField('URL - (Vimeo embed link)', [validators.DataRequired()])
     difficulty = SelectField(u'Difficulty', choices=[(
         'beginner', 'Beginner'),
         ('intermediate', 'Intermediate'),
