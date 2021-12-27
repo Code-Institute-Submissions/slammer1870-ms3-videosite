@@ -21,20 +21,22 @@ def index():
     posts = db.posts.find().limit(12)
     return render_template("index.html", posts=posts)
 
+
 @app.route('/register/', methods=['POST', 'GET'])
 def register():
     form = RegisterForm(request.form)
-    if request.method == 'POST' and form.validate():  
+    if request.method == 'POST' and form.validate():
         user = models.User()
         if user.register(form):
             return redirect(url_for('index'))
     return render_template('register.html', form=form)
 
+
 @app.route('/login/', methods=['POST', 'GET'])
 def login():
     form = LogInForm(request.form)
     print("request initiated", form)
-    if request.method == 'POST' and form.validate():  
+    if request.method == 'POST' and form.validate():
         print("validated")
         user = models.User()
         if user.login(form):
@@ -50,6 +52,8 @@ def logout():
     return user.logout()
 
 # Render category page with all posts in that category
+
+
 @app.route("/videos/<difficulty>/<section>/")
 def category(section, difficulty):
     posts = db.posts.find({"section": section, "difficulty": difficulty})
@@ -130,6 +134,17 @@ def admin(type):
         return render_template("admin_users.html")
     else:
         return render_template("admin_posts.html")
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('500.html'), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
