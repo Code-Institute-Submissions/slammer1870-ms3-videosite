@@ -158,10 +158,14 @@
             >Defense</a
           >
           <!--Buttons rendered conditionally is user is logged in or not-->
-          {% if session.logged_in and session.user.admin %} <a href="{{
-          url_for('admin', type="videos") }}" class="md:mb-0 md:mr-8 lg:mr-16
-          mb-4 uppercase text-left" x-on:click="sideBar = ! sideBar"> Admin {%
-          endif %} {% if session.logged_in %}
+          {% if session.logged_in and session.user.admin %}
+          <a
+            href="{{url_for('admin', type='videos')}}"
+            class="md:mb-0 md:mr-8 lg:mr-16 mb-4 uppercase text-left"
+            x-on:click="sideBar = ! sideBar"
+            >Admin</a
+          >
+          {% endif %} {% if session.logged_in %}
           <a
             href="{{url_for('logout')}}"
             class="
