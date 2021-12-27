@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% block content %}
+<div class="pt-20 p-4 container mx-auto">
+  <a href="{{url_for('admin', type='videos')}}">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="53.907"
+      height="37.149"
+      viewBox="0 0 53.907 37.149"
+      class="mb-8"
+    >
+      <path
+        id="Path_3"
+        data-name="Path 3"
+        d="M0,0V26"
+        transform="translate(19.092 0.707) rotate(45)"
+        fill="none"
+        stroke="#4d4d4d"
+        stroke-width="2"
+      />
+      <line
+        id="Line_9"
+        data-name="Line 9"
+        y2="26"
+        transform="translate(19.447 36.442) rotate(135)"
+        fill="none"
+        stroke="#4d4d4d"
+        stroke-width="2"
+      />
+      <line
+        id="Line_8"
+        data-name="Line 8"
+        y2="52"
+        transform="translate(53.907 18.457) rotate(90)"
+        fill="none"
+        stroke="#4d4d4d"
+        stroke-width="2"
+      />
+    </svg>
+  </a>
+  {% from "partials/_formhelpers.html" import render_field %}
+  <form action="" method="POST" class="max-w-screen-sm mx-auto">
+    <div class="flex flex-col text-sm font-semibold">
+      <p>Are you sure you want to delete {{post.title}}?</p>
+    </div>
+    <div class="flex mb-2">
+      <a
+        href="{{url_for('admin', type='videos')}}"
+        class="bg-gray-600 text-white uppercase font-medium px-4 py-2 ml-auto"
+        >Cancel</a
+      >
+      <button
+        type="submit"
+        class="bg-gray-800 text-white uppercase font-medium px-4 py-2 ml-4"
+        value="Submit"
+      >
+        Delete
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

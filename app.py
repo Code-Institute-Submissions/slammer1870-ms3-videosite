@@ -64,5 +64,72 @@ def lesson(category, difficulty, lesson):
     lesson = db.posts.find_one({"_id": lesson})
     return render_template("lesson.html", posts=posts, lesson=lesson)
 
+# Post create endpoint
+
+
+@app.route('/videos/post/', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def create():
+    form = PostForm(request.form)
+    if request.method == "POST" and form.validate():
+        post = models.Post()
+        post.create(form)
+        flash("New post has been created", "bg-yellow-400")
+        return redirect(url_for('admin', type="videos"))
+    return render_template("post_video.html", form=form)
+
+
+@app.route('/edit/<id>/', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def edit(id):
+    form = PostForm(request.form)
+    post = db.posts.find_one({"_id": id})
+    if post:
+        form.title.data = post['title']
+        form.description.data = post['description']
+        form.url.data = post['url']
+        form.difficulty.data = post['difficulty']
+        form.category.data = post['category']
+
+        if request.method == "POST" and form.validate():
+            post = models.Post()
+            new_form = PostForm(request.form)
+            post.edit(id, new_form)
+            flash("Post has been updated", "bg-yellow-400")
+            return redirect(url_for('admin', type="videos"))
+        return render_template("post_video.html", form=form)
+    return redirect(url_for('index'))
+
+
+@app.route('/posts/delete/<string:id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def delete(id):
+    post = db.posts.find_one({"_id": id})
+    if post:
+        if request.method == "POST":
+            post = models.Post()
+            post.delete(id)
+            flash("Post has been deleted", "bg-red-400")
+            return redirect(url_for('admin', type="videos"))
+    return render_template("delete_video.html", post=post)
+
+# Admin dashbaord
+
+
+@app.route("/admin/<type>/")
+@login_required
+@admin_required
+def admin(type):
+    if type == "videos":
+        posts = db.posts.find()
+        return render_template("admin_videos.html", posts=posts)
+    elif type == "users":
+        return render_template("admin_users.html")
+    else:
+        return render_template("admin_posts.html")
+
 if __name__ == '__main__':
     app.run(debug=True)
